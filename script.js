@@ -595,43 +595,41 @@ const mainContent = document.getElementById("main-content");
 })();
 
 if (passwordInput) {
-  function waitForImageReady(selector, timeoutMs = 3000) {
+  function prepareHeroImage(selector) {
+    const img = document.querySelector(selector);
+    if (!img) return Promise.resolve();
+
+    const decodeIfPossible = () => {
+      if (typeof img.decode === "function") {
+        return img.decode().catch(() => {});
+      }
+      return Promise.resolve();
+    };
+
+    // Always prioritize hero image from the start.
+    img.loading = "eager";
+    img.fetchPriority = "high";
+
+    // Kick off an explicit preload request immediately.
+    const src = img.currentSrc || img.src;
+    if (src) {
+      const preloader = new Image();
+      preloader.decoding = "async";
+      preloader.src = src;
+    }
+
+    if (img.complete && img.naturalWidth > 0) {
+      return decodeIfPossible();
+    }
+
     return new Promise((resolve) => {
-      const img = document.querySelector(selector);
-      if (!img) return resolve();
-
-      if (img.complete && img.naturalWidth > 0) {
-        resolve();
-        return;
-      }
-
-      let settled = false;
-      const finish = () => {
-        if (settled) return;
-        settled = true;
-        img.removeEventListener("load", finish);
-        img.removeEventListener("error", finish);
-        resolve();
-      };
-
+      const finish = () => decodeIfPossible().finally(resolve);
       img.addEventListener("load", finish, { once: true });
-      img.addEventListener("error", finish, { once: true });
-
-      // Hint browser to prioritize this hero image.
-      img.loading = "eager";
-      img.fetchPriority = "high";
-
-      // Fallback preloader in case the element's own fetch has not started yet.
-      const src = img.currentSrc || img.src;
-      if (src) {
-        const preloader = new Image();
-        preloader.decoding = "async";
-        preloader.src = src;
-      }
-
-      setTimeout(finish, timeoutMs);
+      img.addEventListener("error", () => resolve(), { once: true });
     });
   }
+
+  const heroImageReadyPromise = prepareHeroImage("#hero .hero-bg");
 
   passwordInput.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
@@ -647,7 +645,7 @@ if (passwordInput) {
         })
         .then((data) => {
           if (data && data.ok) {
-            waitForImageReady("#hero .hero-bg", 3000).finally(() => {
+            heroImageReadyPromise.finally(() => {
               gsap.to(loginScreen, {
                 opacity: 0,
                 duration: 1.5,
