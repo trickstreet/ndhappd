@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The April Archive | 3 Years</title>
+
+    <!-- Fonts: Elegant Serif (Playfair) + Clean Sans (Manrope) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Manrope:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="noise-overlay"></div>
+    <div id="cursor"></div>
+
+    <!-- 1. LOGIN GATE (temporarily commented out) -->
+    <!-- 1. LOGIN GATE
+    <div id="login-screen">
+      <div class="login-content">
+        <h2>The Archive</h2>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password-input"
+            placeholder="ACCESS CODE"
+            autocomplete="off"
+          />
+          <div class="error-msg" id="error-msg">Access Denied</div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- 2. MAIN WEBSITE -->
+    <main id="main-content" style="visibility: visible; opacity: 1">
+      <!-- Hero -->
+      <section id="hero">
+        <img src="/Images/eyes.png" class="hero-bg" alt="Hero Background" />
+
+        <div class="hero-text">
+          <h1>Happy<br />Anniversary</h1>
+          <div class="subtitle">3 Years of Us</div>
+        </div>
+
+        <div class="sticky-note">
+          <span style="font-family: var(--font-hand); font-size: 1.4rem"
+            >Dearest Eli,</span
+          ><br />
+          Happy 3rd Anniversary. The day I proposed you still feels like a
+          dream. From a girl who once said, "I don't want a relationship," to
+          the one who now cries to say, "I want him with me now." What a
+          beautiful, memorable journey together.
+          <br /><br />
+          - Appu.
+        </div>
+
+        <div class="pulse-counter" id="timer">Calculating...</div>
+      </section>
+
+      <!-- Epistolary Archives (Love Letters) -->
+      <section id="letters-section">
+        <div class="letters-header">
+          <h2>The Letters</h2>
+          <p style="font-size: small">Ini Korach Old School Avaam 😅</p>
+          <br />
+          <p>Words I've kept close to my heart</p>
+        </div>
+        <div class="letters-desk">
+          <!-- Envelope 1 -->
+          <div class="envelope" data-letter="1">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal"><i class="fa-solid fa-heart"></i></div>
+          </div>
+
+          <!-- Envelope 2 -->
+          <div class="envelope" data-letter="2">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal"><i class="fa-solid fa-star"></i></div>
+          </div>
+
+          <!-- Envelope 3 -->
+          <div class="envelope" data-letter="3">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal"><i class="fa-solid fa-infinity"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Letter Modals (Outside of envelopes for proper z-index) -->
+      <div class="letter-backdrop" id="letter-backdrop"></div>
+
+      <div class="letter" id="letter-1" data-lenis-prevent>
+        <button class="close-letter">&times;</button>
+        <div class="letter-content">
+          <div class="date-stamp">April 25, 2023</div>
+          <h4>My Dearest Elimol,</h4>
+          <p>
+            Ennik ninne ishta, wanna be more than best friends. Idh 6 mudhal
+            thodangeetha, kore vattam venda enn vicharichh but oron kaarnam
+            veendum veendum vannodirikm. Infatuation annen vicharichh but no not
+            at all. Pinne nammude friendship poko ennula pedi. Enthayaalum
+            parayandadhale. Pinne bhaaviyill ennik idh parayaan patele enn
+            vicharichh regret adikan vayyaa. <br /><br />
+            NOT A PRANK ALLENGI NJN NORMAL SAMSARIKANA POLE THAMASHAKK ALLA.
+            Vishwasam ayillengi aneennode choichokk. Irunn chinthichatt oru
+            marupadi paranjaa madhi. Entenn idh nee ottum expect cheyilla enn
+            ariyaam but ini parnjillengi sheriyavoola. And answer enthayaalum
+            ayaalum ee friendship and bond should be the same. Baaki okke idh
+            kand kazhinj ninak reply akaan oke avumbo parayaam. <br /><br />
+            The day we first met, I knew something had changed. The world felt
+            different, brighter somehow. You walked into my life and made
+            everything make sense.
+          </p>
+          <div class="signature">Appu</div>
+        </div>
+      </div>
+
+      <div class="letter" id="letter-2" data-lenis-prevent>
+        <button class="close-letter">&times;</button>
+        <div class="letter-content">
+          <div class="date-stamp">December 31, 2025</div>
+          <h4>Ente, Chundellik,</h4>
+          <p>
+            thank you for that yes, a yes that changed our life forever. tbh
+            njaan orikallum vicharichilla nammal ithrem bonded aaavum enn, at
+            the beginning even if you said no or yes , my plan was only to let
+            you know that ingane oraaal ind ivide 😅 nine ithrem ishtapedana
+            ninte presence athrem agrahikunna oraaal , sathyam parnja I was your
+            first fanboy😅🙈 adh endhkondaaan polum nnik ariyila. the only
+            intention was when you ever think of being in a relationship or
+            ennik oraaal koot vennam nn enn thonnunuvo ann I should be your
+            first choice and option adh kazhinjat adh pattilaan anengi ninte
+            ishtam pole ayikotte . ennik pedi aayirn nee ini avide chennat
+            arellum oke kandaa may be at somepoint ishtam thonno ennoke. and im
+            proud of myself that I respected your decision. ullil chunk pottana
+            sangadam indaayittum 😅 njaan ninnode deshyapedano shalyam
+            cheyyaaano vannatilla nn orthat (korach self pukazthal UK 😂)
+            evidenn kittooodi ingane oruthane. muttme ninn eeshode nanni
+            paryadi🥱. jokes aside that yes happened gradually. ippalum orma ind
+            those indirect hints you gave me that you love me. especially ann
+            when u said this when i asked you "Paisa ninte mattavan therodi" for
+            which you replied "adh kannadiyieel nokieet choicho chellapo kitumm"
+            enn😅 ann pottiya oru laddoo ind moleeeeee. a ladoode kashnangl
+            ippalum ind ullil evide okeyoo😂. <br />
+            and ninne ennik orikkallum endha paryaa girlfriend, lover , allengi
+            njaan premikana penn angane onnum thonieetilla and i dont want to
+            call you all that. youve always felt like a home. like someone i
+            knew already like someone who was always been a part of my life 🥹.
+            njn adh ninnode munnum parnjind. the first connection i felt in
+            summer camp, is the same connection i felt in 11th , 12th and so on.
+            pakshe swantham aaal anenn thoniyaalum thodakkathil mindaan
+            pattindaayilaa uk some pedi things and heartbeat koodal and manas
+            blank aval nte ponnaliyaa endhoke aayirn 😂🙂‍↕️. actually parayaaan
+            kore ind pakshe pinnethek endhellum vekkande 😅😅. ee oru 3 varsham
+            kond oru karyam manasilaaayi ini idhpole oraaalem ennik snehikaan
+            pattila nn. Another year ends, but with you, every ending feels like
+            a beautiful beginning. Thank you for being my constant, my comfort.
+            I Love You So Much Elikutty ❤️
+          </p>
+          <div class="signature">-Enn Ninte Swantham Appuch-</div>
+        </div>
+      </div>
+
+      <div class="letter" id="letter-3" data-lenis-prevent>
+        <button class="close-letter">&times;</button>
+        <div class="letter-content">
+          <div class="date-stamp">April 25, 2026</div>
+          <h4>Happy Anniversary,</h4>
+          <p>
+            Its, <b>April 25 2026</b> today. <br />
+            Three years. A thousand memories. And still, every moment with you
+            feels like the first. Here's to forever and then some.
+            <br />
+            3 varsham is not a chillara karyam. 3 years together adhum long
+            distance, and paadaan, ethra oke nalladh anengilum paad aaan, for a
+            boy who's love language is just any form of touch,kisses etc, it is
+            and was very hard for me in several moments, chele samayath i feel
+            like i just want your touch. onoola verdhe enne ingane thott thott
+            ninaalum madhi😅 cuz that's what I do everytime. and for a girl like
+            you who need constant presence , a shoulder to lay on or some warm
+            heartfelt hugs when in bad mood, hardships or the frustrations of
+            your course, I know it wasn't easy for you too. but somehow because
+            of the love we had for eachother made us here. SO PROUD THAT WE
+            COMPLETED 3 YEARS TOGETHER🥹🫂. at the first 2 years I felt
+            everythings perfect even tho I knew nothing's always perfect, but
+            last year made me realise that we too have issues that we didn't
+            knew existed. last year was an emotional roller coaster for me where
+            it made me weak, strong , cry , laugh, confused all at once.
+            something I thought that would be easy for me to go through became
+            the hardest days of my life . it made me question many aspects of
+            us. Even Tho this is just the beginning of the things we are gonna
+            face, I hope we don't go through this again . even when all these
+            are there I think this is how it should go, ellaaam eppozhum
+            nannayit poyaaal nammal polum ariyaand our minds will think ellaam
+            perfect aaan which will be hard for us when real problem happens .
+            adhond that phase even tho we suffered, ee oru karythil mathrm
+            nannayi🫂🫂.
+            <br />
+            Now talking about my elikutty, ninte arrival to my jeevitham arinjum
+            ariyaandum kore karyngl maateend ente lifil😅 njaan prarthikaar ulla
+            oral thnneya but when you came my prayers became stronger , ninte
+            koode jeevikaan ulla agrham made my prayers stronger. from the day I
+            felt ennik nee ente koode ennum vennam , ann thodangiyaa prarthana
+            aaan adh gradually increase aayi increase aaayi it made my other
+            prayers more stronger🥹. and as u know I was boy who was very
+            insecure about my voice, not when I speak but when I send audios.
+            there were times when I had recorded the same voice 2,3 times before
+            sending😅 and you were the only one I had shared it to. now look at
+            me angane oruthanil ninn ippo njn eppalum audio aaan to mostly
+            everybody. unless its risky for me to speak to you via audio njn
+            ayikaarila. and the whole credits goes to you 🥹🥹🫂😙😙😙. Njaan
+            vicharichind ok nnik ishtaaan nine, but ingane oke ennik ishtapedaan
+            patto oraaale enn. njaan angane adhikam karayathoraalaa, but i get
+            emotional very easily 😅 aarum ariyandaa 🤭 but i have cried for
+            you. onn kanaan pattiyengi, 5mintengi 5 minute koode indaayirnengi
+            enn orthat. kandaa engane nadanna njaaanaa 🥱ippo ingane aaayi🥱.
+            looking back to our beginning, it was so joyfull with our raathri
+            talks, kunji kunji romance, edakke ulla choriyals, angane ellaam
+            even your expressions oke ennik bayangara ishtaa
+          </p>
+          <div class="signature">Eternally Yours</div>
+        </div>
+      </div>
+
+      <!-- Memory Match Game -->
+      <section id="memory-game-section">
+        <div class="game-header">
+          <h2>Memory Match</h2>
+          <p>Match our moments together</p>
+        </div>
+        <div class="memory-grid" id="memory-grid">
+          <!-- Cards will be generated by JavaScript -->
+        </div>
+        <div class="game-stats">
+          <div>Moves: <span id="move-count">0</span></div>
+          <div>Matches: <span id="match-count">0</span>/8</div>
+        </div>
+      </section>
+
+      <!-- Memory Game Complete Message -->
+      <div class="game-complete-message" id="memory-complete">
+        <h3>Perfect Match!</h3>
+        <p>Just like us — meant to be together.</p>
+        <button class="game-btn" id="memory-replay">Play Again</button>
+      </div>
+
+      <!-- Horizontal Scroll Timeline -->
+      <div id="memory-lane-wrapper">
+        <div id="memory-lane-track">
+          <!-- Intro Panel -->
+          <div class="panel">
+            <div class="timeline-intro" style="text-align: center">
+              <h2>MEMORIES</h2>
+              <!-- Background Text -->
+              <p>
+                Scroll to walk down memory lane
+                <i
+                  class="fa-solid fa-arrow-right-long"
+                  style="margin-left: 15px; color: var(--accent-gold)"
+                ></i>
+              </p>
+            </div>
+          </div>
+
+          <!-- Date 1: Summer Camp & Catechism -->
+          <div class="panel panel-1">
+            <div class="date-card">
+              <div class="date-img-box">
+                <img src="/Images/dates/summercamp.png" alt="Summer Camp" />
+              </div>
+              <div class="date-content">
+                <span class="meta">01. The Very Beginning</span>
+                <h3>Summer Camp & Catechism</h3>
+                <p>
+                  On One Fine Summer camp held at st.michaels church on 2016/15
+                  was the first meet directly or indirectly that made us here
+                  😅. Motham orma ilengilum, penpillerde mogath polum nokathaa
+                  ee njn ann oru penkuttyode samsarich, a unknown connection
+                  that made me feeel that i knew you already. from asking you
+                  what did mam taught us today to fighting the same day was the
+                  start of our journey 😅. angane 2 kollam kazhinj pinne
+                  chatechisthil aa thonnivaasine veendum kaanandhum pand eppallo
+                  ullil keriyaa aa spark veendum adikandhum veeendum connection
+                  lost avandhum ennit veeendum kandmutti spark adich best friend
+                  aaayi dheyy ippo ivide ethi 🥹😂🙈
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date 2: First Church Meetup -->
+          <div class="panel panel-2">
+            <div class="date-card">
+              <div class="date-content">
+                <span class="meta">02. First Connection: Church</span>
+                <h3>First Meet Up</h3>
+                <p>
+                  Nammal Relationshipil aayit , adhyayit kaanandh ann aaan in
+                  church , kore kaalathin shesham direct aaayit samsarichadhum
+                  ann aaan😅. Ayooo orikallum marakaan pattila aa
+                  shenikapedaatha adhithi ne . Tresma 😅 aa penn kaarnam nammade
+                  oru nalla divsm poi kitty. adhyayit kaanante excitement motham
+                  prakadipikaaan avaand kadich pidich irikaaayrn😅 dhippo povum
+                  dhippo povum enn parnj 2 manikoor kazhinjattum aaal poyillaa
+                  😂 pakshe that day gave us our first clear photo together 🥹
+                </p>
+              </div>
+              <div class="date-img-box">
+                <img src="/Images/dates/First Meet.png" alt="Church" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Date 3: Megamall -->
+          <div class="panel panel-3">
+            <div class="date-card">
+              <div class="date-img-box">
+                <!-- Polaroid-style image wrapper -->
+                <img src="/Images/dates/date 1.png" alt="Megamall" />
+              </div>
+              <div class="date-content">
+                <span class="meta">03. First Date - 14/02/2024</span>
+                <h3>Megamall</h3>
+                <p>
+                  Angane aa kathirina divsm ethi😅 ninak vendi praarthich
+                  indakiyaa aa kondha thanna divsm😅, adhyayit aa kayy pidich
+                  nadanna divsm 😅, first close aayit photo edutha divsm 🥹.
+                  angane kore karyngl nadanna divsm. one of the most special day
+                  of our life. our first date. Ann athrem excited aayit paleel
+                  vanadh ennik orma ind. and tbh that was the best thing we
+                  could do. start from where it all began "St.Michael's Church".
+                  ann ninne kandappo indayaa oru nenj idipp ind mole😅 ninak adh
+                  manasilayadh annallo lle 😅. and giving you that kondha that
+                  day was our real destiny, karnm ethra vattam ethra reedhieel
+                  noki adh theraan, but eesho made me myself to give it you.
+                  that was our first gift exchange and then out of a blue nee
+                  ennik aa kannada thann, a gift that njn eppalum sookshich
+                  vekkum, a git thats so special to me . paryaan anenngi kore
+                  ind ee disvm motham paryande verum😅 so njn ivide nirthunnu.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date 4: Sahara Centre (Reversed Layout) -->
+          <div class="panel panel-4">
+            <div class="date-card">
+              <div class="date-content">
+                <span class="meta">04. 2nd Date - 12/06/2024</span>
+                <h3>Sahara Centre</h3>
+                <p>
+                  More like an emotional roller coaster. oro koodikaazhcha
+                  theerumbo aayirkum veendum veendum kaananum adukaaanum
+                  thonaar. angane kore kaathirin kanda oru divsam, our second
+                  date 🥹. aa oru divsm ennik ippallum marakaan patila 😅,
+                  nammal orumich paaat padeeethum, kore chirichadhum videos
+                  eduthadhum food adichadhum oke porame , njn adhyayit ente
+                  lifil oraale nerit propose cheythadhum ann aaan😅. swantham
+                  aaanen arinjattum aa oru qwerky proposal was very well needed
+                  enn thonni😅 even tho ithrem aduppam indaayittum ennik
+                  chammalum santhoshavum oke aayirn when i proposed you and when
+                  u said YES🙈😅🥹. aa modhiram ippo illengilum and even tho
+                  very cheap annengilum aa modhiram ittadhum adh ninte kayyme
+                  kedakkandh kaanan it was tooo goood🥹 aa oru moment ennik
+                  marakkaan patilla and the proccess behind it😅. chirich comedy
+                  oke parnj irina nammal suddenly emotional aaayi, nee ente
+                  thollath thala vech appo kedannappo ente mole endhokyoo pettan
+                  free ayaapolethe oru avstha aaayirn 😅🥹 and appo njn ninak
+                  thallel oru kiss thannadhoke still there in my heart . and
+                  vicharicha pole allengilum our first kiss and side hug ann
+                  aaayirn 😅🥹🥹,even tho that wasnt perfect it was soo goood🥹
+                  those kunji kunji moments was the best memories we had till
+                  date. and ee oru divsm enna oru divsm aaayirn 😅 ravile to
+                  ucha thiriyal santhosham, funn, emotional😂 ennit ucha
+                  thiriyal to raathri deshyam,sangdam,sangadam kondulla deshyam,
+                  emotional 😅 litteral rollercoaster of a day 😅
+                </p>
+              </div>
+              <div class="date-img-box">
+                <img src="/Images/dates/Date 2.png" alt="Sahara Centre" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Date 5: City Centre (Spotlight) -->
+          <div class="panel panel-5" id="spotlight-section">
+            <div class="spotlight-mask"></div>
+            <div class="date-card">
+              <div
+                class="date-img-box"
+                style="transform: rotate(0deg); border: none; padding: 0"
+              >
+                <!-- Full bleed image for cinematic feel -->
+                <img src="/Images/dates/Date 3.png" alt="City Centre" />
+              </div>
+              <div
+                class="date-content"
+                style="
+                  background: transparent;
+                  backdrop-filter: none;
+                  border: none;
+                "
+              >
+                <span class="meta" style="color: #fff"
+                  >05. 3rd Date — 18 jun 2025
+                </span>
+                <h3>City Centre</h3>
+                <p style="color: #ccc">
+                  Nammal Avasanamaayit mariyadhak kanda divsm, among all the
+                  Kashtaapds, a day well spent🥹. Kore aaayit kaanan
+                  pattaathente, samsarikaan pattathente, oke veshmavum oru desp
+                  feel oke indaayirnadh otta divsm kondaaan ready aaayee🥹. ann
+                  nammal plan cheyth , we were wearing a blue dress. Match
+                  match🤭😅 that kazhchaa was itself too good 😅. pinnee a lot
+                  of cute, weird, lovely pics eduthadh oke angane angot marakaan
+                  patto😅 not too perfect allengilum njn backeen kettipidichaa
+                  edutha aa photom aa momentum ippalum special aan ennik 🥹😅.
+                  daivam anugrahich ann nalla kore momentsum photosum kitty.
+                  pinne ingane kunji kunji karyngl anengilu, vaa thoraathe
+                  ingane irunn santhoshathode samsarikunnadh oke oru
+                  resaaaairn🥹 something which i always enjoyy. eee kaathiripin
+                  oke oru sugham thonnikandh ingane chelle koodikazchalukalil
+                  aaan, vere onnum adhikam orakaand namal maathrm nammk kittuna
+                  korach valuable moments, some moments that we can always
+                  cherish about 🥹
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anniversary Cake -->
+      <section id="cake-section">
+        <div class="cake-heading">
+          <span class="heading-line">Happy</span>
+          <span class="heading-line accent">3<sup>rd</sup> Anniversary</span>
+          <span class="heading-line script">Elikutty</span>
+        </div>
+
+        <div class="cake-stage" id="cake-stage">
+          <!-- Ambient glow under the cake -->
+          <div class="cake-glow"></div>
+
+          <!-- Candles -->
+          <div class="candles-row">
+            <div class="candle">
+              <div class="flame-wrap">
+                <div class="flame-outer"></div>
+                <div class="flame"></div>
+                <div class="flame-glow"></div>
+              </div>
+              <div class="wick"></div>
+              <div class="candle-body">
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="flame-wrap">
+                <div class="flame-outer"></div>
+                <div class="flame"></div>
+                <div class="flame-glow"></div>
+              </div>
+              <div class="wick"></div>
+              <div class="candle-body">
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="flame-wrap">
+                <div class="flame-outer"></div>
+                <div class="flame"></div>
+                <div class="flame-glow"></div>
+              </div>
+              <div class="wick"></div>
+              <div class="candle-body">
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+                <div class="candle-stripe"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cake -->
+          <div class="cake">
+            <!-- Top tier -->
+            <div class="cake-layer top">
+              <div class="cream-border top-cream"></div>
+              <div class="drip drip-1"></div>
+              <div class="drip drip-2"></div>
+              <div class="drip drip-3"></div>
+              <div class="drip drip-4"></div>
+              <div class="drip drip-5"></div>
+              <div class="drip drip-6"></div>
+              <div class="drip drip-7"></div>
+              <div class="cake-text">3</div>
+            </div>
+
+            <!-- Middle tier -->
+            <div class="cake-layer middle">
+              <div class="cream-border mid-cream"></div>
+              <div class="sprinkles">
+                <span class="sprinkle s1"></span
+                ><span class="sprinkle s2"></span>
+                <span class="sprinkle s3"></span
+                ><span class="sprinkle s4"></span>
+                <span class="sprinkle s5"></span
+                ><span class="sprinkle s6"></span>
+                <span class="sprinkle s7"></span
+                ><span class="sprinkle s8"></span>
+                <span class="sprinkle s9"></span
+                ><span class="sprinkle s10"></span>
+                <span class="sprinkle s11"></span
+                ><span class="sprinkle s12"></span>
+              </div>
+            </div>
+
+            <!-- Bottom tier -->
+            <div class="cake-layer bottom">
+              <div class="cream-border bot-cream"></div>
+              <div class="rosette r1"></div>
+              <div class="rosette r2"></div>
+              <div class="rosette r3"></div>
+              <div class="rosette r4"></div>
+              <div class="rosette r5"></div>
+            </div>
+
+            <!-- Base plate -->
+            <div class="cake-plate">
+              <div class="plate-shine"></div>
+            </div>
+          </div>
+
+          <!-- Shadow under plate -->
+          <div class="cake-shadow"></div>
+        </div>
+
+        <button class="blow-btn" id="blow-button">
+          <i class="fa-solid fa-wind"></i>
+          <span>Blow the Candles</span>
+        </button>
+
+        <!-- Message revealed after blowing -->
+        <div class="cake-message" id="cake-message">
+          <h3>Three Years Down&hellip;</h3>
+          <p>
+            Three candles for three beautiful years of love, laughter, and
+            everything in between. Here&rsquo;s to a lifetime more of
+            &ldquo;us.&rdquo;
+          </p>
+          <span class="cake-msg-heart">&hearts;</span>
+        </div>
+      </section>
+
+      <!-- Editorial Poster Gallery Gifts -->
+      <section id="editorial-gallery">
+        <div class="editorial-header">
+          <h2>A Gallery of Moments</h2>
+          <p>A collection of things that we have shared.</p>
+        </div>
+
+        <div class="editorial-grid">
+          <!-- Card 0: Busan Style -->
+          <div class="editorial-card card-busan">
+            <div class="busan-header-top">
+              <span>KURIP</span>
+              <span>KURIP</span>
+            </div>
+            <div class="busan-grid-inner">
+              <div class="busan-vertical-title">Suicide Note</div>
+              <div class="busan-image-section">
+                <div class="busan-meta">Elikk oru athmahathya kurip</div>
+                <div class="busan-image-wrapper">
+                  <img src="/Images/GIFTS/kurip.jpeg" alt="Gift 0" />
+                  <div class="busan-badge">00</div>
+                </div>
+              </div>
+              <div class="busan-side-text">
+                <p>
+                  "Ellaarum adhyam love letter aan kodukka, pakshe njn koduthadh
+                  suicide note aaan 😂 "
+                </p>
+              </div>
+            </div>
+            <div class="busan-footer-bottom">
+              <span>Chathatilla</span>
+              <span>Jeevan Ind</span>
+            </div>
+          </div>
+          <div class="editorial-card card-blossom">
+            <div class="blossom-bg-text">Kondha</div>
+            <div class="blossom-content">
+              <div class="blossom-text-left">
+                <p>
+                  Love it or not. a gift every guy should give his girl first.
+                </p>
+              </div>
+              <div class="blossom-image-container">
+                <img src="/Images/GIFTS/Rosary.png" alt="Gift 1" />
+              </div>
+              <div class="blossom-text-right">
+                <p>
+                  Ninte oro dukhangalum oro vedhanakalum oro manikal aayi
+                  madhavin samarpich indaakiya Kondha
+                </p>
+              </div>
+            </div>
+            <div class="blossom-footer">
+              <span>NJAN ADHYAMAYIT KODUTHA GIFT</span>
+              <span>KONDHA</span>
+            </div>
+          </div>
+          <!-- Card 2: Tokyo Style -->
+          <div class="editorial-card card-tokyo">
+            <div class="tokyo-header">Cooling Glass</div>
+            <div class="tokyo-image-container">
+              <img src="/Images/GIFTS/glasses.png" alt="Gift 2" />
+              <div class="tokyo-subtitle-left">
+                The First Gift I Got From My Elimol
+              </div>
+              <div class="tokyo-subtitle-right">02</div>
+            </div>
+            <div class="tokyo-footer-text">
+              <p>
+                This is something that i always try to keep safe, something that
+                is close to my heart. Ennik nee thanna adhyathe gift
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 1: Blossom Style -->
+
+          <!-- Card 4: Blossom Style -->
+          <div class="editorial-card card-blossom delay-1">
+            <div class="blossom-bg-text">YEAR</div>
+            <div class="blossom-content">
+              <div class="blossom-text-left">
+                <p>
+                  Not so good, not so expensive, but a token of love and promise
+                </p>
+              </div>
+              <div class="blossom-image-container">
+                <img src="/Images/GIFTS/ring.jpeg" alt="Gift 4" />
+              </div>
+              <div class="blossom-text-right">
+                <p>Saharel Poyappo Njaan Ninak Itt thanna Modhiram 🥰🥹</p>
+              </div>
+            </div>
+            <div class="blossom-footer">
+              <span>Kunji Modhiram</span>
+              <span>JUNE 2024</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Tokyo Style -->
+          <div class="editorial-card card-tokyo delay-1">
+            <div class="tokyo-header">BDAY GIFT</div>
+            <div class="tokyo-image-container">
+              <img src="/Images/GIFTS/bday-gift.jpeg" alt="Gift 5" />
+              <div class="tokyo-subtitle-left">Cute Like Elicutey😂</div>
+              <div class="tokyo-subtitle-right">05</div>
+            </div>
+            <div class="tokyo-footer-text">
+              <p>
+                ROSE GOLD watch vaanikaan ninnat pattand elikuttyk vaanich
+                kodutha gift 🙈
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 6: Busan Style -->
+          <div class="editorial-card card-busan delay-2">
+            <div class="busan-header-top">
+              <span>Hand</span>
+              <span>Drawn</span>
+            </div>
+            <div class="busan-grid-inner">
+              <div class="busan-vertical-title">Appu 😙 Eli</div>
+              <div class="busan-image-section">
+                <div class="busan-meta">Appuseey Oru Umma Thaadaa Ennik😅</div>
+                <div class="busan-image-wrapper">
+                  <img src="/Images/GIFTS/drawing.png" alt="Gift 6" />
+                  <div class="busan-badge">06</div>
+                </div>
+              </div>
+              <div class="busan-side-text">
+                <p>
+                  " nerit kodukaan pattatha umma elikutty verach thannind 🥹🤭"
+                </p>
+              </div>
+            </div>
+            <div class="busan-footer-bottom">
+              <span>umma</span>
+              <span>umma</span>
+            </div>
+          </div>
+          <!-- Card 3: Busan Style -->
+          <div class="editorial-card card-busan">
+            <div class="busan-header-top">
+              <span>Customized</span>
+              <span>Key Chain</span>
+            </div>
+            <div class="busan-grid-inner">
+              <div class="busan-vertical-title">Custom Spotify</div>
+              <div class="busan-image-section">
+                <div class="busan-meta">
+                  Spotify key chain with nammade pic and playlist
+                </div>
+                <div class="busan-image-wrapper">
+                  <img src="/Images/GIFTS/key-chain.png" alt="Gift 3" />
+                  <div class="busan-badge">03</div>
+                </div>
+              </div>
+              <div class="busan-side-text">
+                <p>"Kinda Small Proposal With Songs😭😅"</p>
+              </div>
+            </div>
+            <div class="busan-footer-bottom">
+              <span>Mudhal Nee</span>
+              <span>Mudivum Nee</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trivia Quiz Game -->
+      <section id="trivia-section">
+        <div class="game-header">
+          <h2>How Well Do You Know Us?</h2>
+          <p>Full mark vanicha oru gift ind 🤭</p>
+        </div>
+        <div class="trivia-container" id="trivia-container">
+          <div class="trivia-progress" id="trivia-progress">
+            <!-- Progress dots generated by JS -->
+          </div>
+          <div class="trivia-card" id="trivia-card">
+            <div class="question-number" id="question-number">
+              Question 1 of 5
+            </div>
+            <div class="question-text" id="question-text">Loading...</div>
+            <div class="trivia-options" id="trivia-options">
+              <!-- Options generated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Surprise Music Player (hidden until perfect quiz score) -->
+      <section id="surprise-player-section" style="display: none">
+        <div class="surprise-reveal-overlay" id="surprise-reveal-overlay"></div>
+        <div class="surprise-player-wrapper">
+          <div class="surprise-header">
+            <div class="surprise-sparkle">✦</div>
+            <h2>A Song For You</h2>
+            <p>You unlocked something special...</p>
+          </div>
+
+          <div class="surprise-player-card">
+            <!-- Album Art Side -->
+            <div class="sp-album-side">
+              <div class="sp-album-art-wrapper">
+                <img
+                  src="music/ALBUM/Album art2.png"
+                  alt="Album Art"
+                  class="sp-album-art"
+                  id="sp-album-art"
+                />
+                <div class="sp-vinyl-peek"></div>
+              </div>
+              <div class="sp-track-info">
+                <div class="sp-track-title">The Prayer Of Love</div>
+                <div class="sp-track-artist">For Elimol</div>
+              </div>
+              <div class="sp-controls">
+                <button
+                  id="sp-play-btn"
+                  class="sp-play-btn"
+                  aria-label="Play surprise song"
+                >
+                  <i class="fa-solid fa-play"></i>
+                </button>
+              </div>
+              <div class="sp-progress-wrapper">
+                <span class="sp-time" id="sp-current-time">0:00</span>
+                <input
+                  type="range"
+                  id="sp-progress-bar"
+                  class="sp-progress-bar"
+                  min="0"
+                  max="100"
+                  value="0"
+                />
+                <span class="sp-time" id="sp-duration">0:00</span>
+              </div>
+            </div>
+
+            <!-- Lyrics Side -->
+            <div class="sp-lyrics-side" id="sp-lyrics-container">
+              <div class="sp-lyrics-header">LYRICS</div>
+              <div class="sp-lyrics-scroll" id="sp-lyrics-scroll">
+                <!-- Lyrics lines injected by JS -->
+              </div>
+            </div>
+          </div>
+
+          <audio id="sp-audio" preload="metadata">
+            <source src="music/ALBUM/with_love.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+      </section>
+      <!-- Final Message -->
+      <section id="final-message-section">
+        <div class="final-message-box">
+          <p class="final-message-kicker">One Last Note</p>
+          <h1>To My Chakara Elimol</h1>
+          <p class="final-message-text">
+            3 years of friendship, 3 years of love. A lot of things changed , A
+            lot of things unchanged, and our love stays the same.☺️ Ippallum
+            Ariyilla Ninnode ishtaan parayaan engane dhayryam kittiye enn.
+            Nammal relationship thodangeet or atleast ninne njn propose cheythat
+            innek 3 varsham aaayi💖 Adh kazhinj nammal onn mariyadhak
+            kandekkandh kayyil ennavunna athre oll, but the kunji kunji moments
+            we made is what we have. jeevithakaalam motham orthirikaaanum
+            chirikaaanum veshmikaanum oke aayit nammade ullla ettum best moments
+            aaan adhoke🥹 LDR Karnm Orovattam kaanumbollum oro emotion aaairn,
+            adhond thanne each and every kandmuttalukkal were very special for
+            me ❤️. and ennikum ippallum ishtaaa ninte oro cute cute
+            expressionsum, weird shitsum, samsaram oke kelkaaan😅😅 The same old
+            ishtam for these still continues 🤭. Nammal ee 3 varhsm pala
+            karyngaliloodem kedann poi , Pala prshngl indaairn, miss cheyythen
+            onnum oru kayyum kannakum illaa, Kaanan thonnnumbo onnum nammak
+            kaanan pattarila, baaaki ullor nadkana pole eppalum orumich
+            nadakaaano irikaano samsarikaano patteetilla ☹️🥺. but despite all
+            of these, nammal pidich ninn, the love was still strong. and ofc a
+            part of this is always reaasurance , ishtam koranjo ennulla pedi
+            angane oke indaaavum and that is because love is still there.❤️ and
+            ethra kaalam kazhinjaaalum be the same person. Look indengilum
+            Lookil allaand njn ninnil aduth arinjappolum ishtapettathum is the
+            person you are . ninte personalityaan enne ettum ishtapedutheedh
+            ❤️🥹 Adh epallum kaath sookshikanm , endhoke situationilkoode
+            poyaaalum adh hold cheyyanm ❤️ Njan kandaa elinekaalum many changes
+            ninak vannind ippo. and there are goods and bads. But Ik what you
+            are going through and the state you are in. but i know u ellaam
+            sheriyaavum and u will become the elin you were ❤️🫂 Koode indaaavum
+            eppollum❤️ and I will also try my best to the same appu i have
+            been.<br /><br />
+            Once Again Happy 3rd Anniversary my CHUNDELI🥰 ee aniversary oke
+            sample vedikatt aaaan . inieeem angott life long nammak orumich
+            nammade wedding anniversaryeeem ee anivversaryeem ellaam orumich
+            orey veetil irun koodan pattana oru kaalam veratte enn njn
+            praarthikunnu eeshoye 😅😅🥹🥰.
+          </p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section
+        style="
+          height: 30vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: #000;
+        "
+      >
+        <p
+          style="
+            color: var(--accent-gold);
+            font-family: var(--font-hand);
+            font-size: 2rem;
+          "
+        >
+          Forever to go...
+        </p>
+        <p
+          style="
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            margin-top: 10px;
+            letter-spacing: 2px;
+          "
+        >
+          EST. 2023
+        </p>
+      </section>
+    </main>
+
+    <!-- 3. MUSIC PLAYER -->
+    <div id="vinyl-container" aria-label="Music player">
+      <button
+        type="button"
+        class="player-fab"
+        id="player-toggle"
+        aria-label="Toggle music player"
+      >
+        <span class="fab-vinyl" aria-hidden="true">
+          <span class="fab-grooves"></span>
+          <span class="fab-label"></span>
+        </span>
+      </button>
+
+      <div class="player-card">
+        <div class="player-top">
+          <div class="vinyl-disc" id="vinyl-disc" aria-label="Toggle play">
+            <div class="vinyl-grooves"></div>
+            <div class="vinyl-label"></div>
+          </div>
+
+          <div class="player-meta">
+            <div class="player-kicker">Now playing</div>
+            <div class="song-name" id="song-display">Song Title</div>
+
+            <div class="player-progress">
+              <input
+                id="progress-bar"
+                class="progress-bar"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                aria-label="Seek"
+              />
+              <div class="player-times">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls" aria-label="Playback controls">
+          <button type="button" id="prev-btn" aria-label="Previous">
+            <i class="fa-solid fa-backward-step"></i>
+          </button>
+          <button type="button" id="play-btn" aria-label="Play/pause">
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button type="button" id="next-btn" aria-label="Next">
+            <i class="fa-solid fa-forward-step"></i>
+          </button>
+        </div>
+
+        <audio id="audio-player"></audio>
+      </div>
+    </div>
+
+    <!-- LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Configuration (load before custom scripts) -->
+    <script src="config.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+  </body>
+</html>
