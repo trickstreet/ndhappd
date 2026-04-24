@@ -595,6 +595,44 @@ const mainContent = document.getElementById("main-content");
 })();
 
 if (passwordInput) {
+  function waitForImageReady(selector, timeoutMs = 3000) {
+    return new Promise((resolve) => {
+      const img = document.querySelector(selector);
+      if (!img) return resolve();
+
+      if (img.complete && img.naturalWidth > 0) {
+        resolve();
+        return;
+      }
+
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        img.removeEventListener("load", finish);
+        img.removeEventListener("error", finish);
+        resolve();
+      };
+
+      img.addEventListener("load", finish, { once: true });
+      img.addEventListener("error", finish, { once: true });
+
+      // Hint browser to prioritize this hero image.
+      img.loading = "eager";
+      img.fetchPriority = "high";
+
+      // Fallback preloader in case the element's own fetch has not started yet.
+      const src = img.currentSrc || img.src;
+      if (src) {
+        const preloader = new Image();
+        preloader.decoding = "async";
+        preloader.src = src;
+      }
+
+      setTimeout(finish, timeoutMs);
+    });
+  }
+
   passwordInput.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
       // POST password to serverless login API (SITE_PASSWORD stored in env)
@@ -609,44 +647,48 @@ if (passwordInput) {
         })
         .then((data) => {
           if (data && data.ok) {
-            triggerConfetti();
-            gsap.to(loginScreen, {
-              opacity: 0,
-              duration: 1.5,
-              ease: "power2.inOut",
-              onComplete: () => {
-                if (loginScreen) loginScreen.style.display = "none";
-                if (mainContent) {
-                  mainContent.style.visibility = "visible";
-                  mainContent.style.opacity = 1;
-                }
+            waitForImageReady("#hero .hero-bg", 3000).finally(() => {
+              gsap.to(loginScreen, {
+                opacity: 0,
+                duration: 1.5,
+                ease: "power2.inOut",
+                onComplete: () => {
+                  if (loginScreen) loginScreen.style.display = "none";
+                  if (mainContent) {
+                    mainContent.style.visibility = "visible";
+                    mainContent.style.opacity = 1;
+                  }
 
-                // Mark authenticated and reveal protected assets
-                document.body.classList.add("authenticated");
-                if (typeof window._revealProtectedAssets === "function")
-                  window._revealProtectedAssets();
+                  // Mark authenticated and reveal protected assets
+                  document.body.classList.add("authenticated");
+                  if (typeof window._revealProtectedAssets === "function")
+                    window._revealProtectedAssets();
 
-                // Ensure hero entrance animation runs when content becomes visible
-                const hero = document.querySelector(".hero-text");
-                if (hero) {
-                  hero.classList.remove("show");
-                  // small delay so the class addition occurs after paint
-                  setTimeout(() => hero.classList.add("show"), 120);
-                }
+                  // Start confetti exactly when the content is revealed.
+                  triggerConfetti();
 
-                initScrollAnimations();
-                initLetters();
-                initLibrary();
-                initMemoryGame();
-                initTriviaGame();
-                initCake();
-                if (typeof initSectionAnimations === "function")
-                  initSectionAnimations();
-                if (typeof initEditorialAnimations === "function")
-                  initEditorialAnimations();
-                if (typeof initTimelineAnimations === "function")
-                  initTimelineAnimations();
-              },
+                  // Ensure hero entrance animation runs when content becomes visible
+                  const hero = document.querySelector(".hero-text");
+                  if (hero) {
+                    hero.classList.remove("show");
+                    // small delay so the class addition occurs after paint
+                    setTimeout(() => hero.classList.add("show"), 120);
+                  }
+
+                  initScrollAnimations();
+                  initLetters();
+                  initLibrary();
+                  initMemoryGame();
+                  initTriviaGame();
+                  initCake();
+                  if (typeof initSectionAnimations === "function")
+                    initSectionAnimations();
+                  if (typeof initEditorialAnimations === "function")
+                    initEditorialAnimations();
+                  if (typeof initTimelineAnimations === "function")
+                    initTimelineAnimations();
+                },
+              });
             });
           } else {
             if (errorMsg && data && data.data && data.data.error) {
