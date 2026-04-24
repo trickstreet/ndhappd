@@ -640,6 +640,10 @@ if (passwordInput) {
                 initMemoryGame();
                 initTriviaGame();
                 initCake();
+                if (typeof initSectionAnimations === "function")
+                  initSectionAnimations();
+                if (typeof initEditorialAnimations === "function")
+                  initEditorialAnimations();
                 if (typeof initTimelineAnimations === "function")
                   initTimelineAnimations();
               },
@@ -1075,10 +1079,100 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// --- GLOBAL SECTION ENTRANCE ANIMATIONS ---
+function initSectionAnimations() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
+    return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  if (prefersReducedMotion) return;
+
+  const easeOut = "power3.out";
+
+  const sectionGroups = [
+    {
+      selector: "#letters-section .letters-header > *",
+      y: 28,
+      stagger: 0.12,
+    },
+    {
+      selector: "#letters-section .envelope",
+      y: 32,
+      stagger: 0.14,
+    },
+    {
+      selector: "#memory-game-section .game-header > *",
+      y: 24,
+      stagger: 0.12,
+    },
+    {
+      selector: "#memory-game-section .memory-grid, #memory-game-section .game-stats",
+      y: 30,
+      stagger: 0.15,
+    },
+    {
+      selector: "#cake-section .cake-heading .heading-line, #cake-section .cake-stage, #cake-section .blow-btn",
+      y: 26,
+      stagger: 0.14,
+    },
+    {
+      selector: "#trivia-section .game-header > *, #trivia-section .trivia-card",
+      y: 26,
+      stagger: 0.14,
+    },
+    {
+      selector:
+        "#final-message-section .final-message-kicker, #final-message-section h1, #final-message-section .final-message-text",
+      y: 24,
+      stagger: 0.15,
+    },
+  ];
+
+  sectionGroups.forEach((group) => {
+    const nodes = gsap.utils.toArray(group.selector);
+    if (!nodes.length) return;
+    gsap.from(nodes, {
+      opacity: 0,
+      y: group.y,
+      duration: 0.75,
+      stagger: group.stagger,
+      ease: easeOut,
+      scrollTrigger: {
+        trigger: nodes[0],
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+
+  const panels = gsap.utils.toArray("#memory-lane-track .panel .date-card");
+  panels.forEach((card) => {
+    const isReverse = !!card.closest(".panel-2, .panel-4");
+    gsap.from(card, {
+      opacity: 0,
+      x: isReverse ? 56 : -56,
+      duration: 0.95,
+      ease: easeOut,
+      scrollTrigger: {
+        trigger: card,
+        start: "top 82%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+}
+
 // --- EDITORIAL GALLERY ANIMATIONS ---
 function initEditorialAnimations() {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
     return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  if (prefersReducedMotion) return;
 
   const cards = gsap.utils.toArray(".editorial-card");
 
@@ -1170,7 +1264,7 @@ function initEditorialAnimations() {
             opacity: 0,
             duration: 0.8,
             stagger: 0.15,
-            ease: "back.out(1.5)",
+            ease: "power3.out",
           },
           "-=0.8",
         );
@@ -1199,7 +1293,7 @@ function initEditorialAnimations() {
       if (badge)
         tl.from(
           badge,
-          { scale: 0, rotation: -90, duration: 0.6, ease: "back.out(2)" },
+          { scale: 0.4, rotation: -65, duration: 0.6, ease: "power3.out" },
           "-=0.4",
         );
       if (texts.length)
@@ -1618,6 +1712,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof initMemoryGame === "function") initMemoryGame();
     if (typeof initTriviaGame === "function") initTriviaGame();
     if (typeof initCake === "function") initCake();
+    if (typeof initSectionAnimations === "function") initSectionAnimations();
     if (typeof initEditorialAnimations === "function")
       initEditorialAnimations();
   }
