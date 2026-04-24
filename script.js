@@ -1108,17 +1108,20 @@ function initSectionAnimations() {
       stagger: 0.12,
     },
     {
-      selector: "#memory-game-section .memory-grid, #memory-game-section .game-stats",
+      selector:
+        "#memory-game-section .memory-grid, #memory-game-section .game-stats",
       y: 30,
       stagger: 0.15,
     },
     {
-      selector: "#cake-section .cake-heading .heading-line, #cake-section .cake-stage, #cake-section .blow-btn",
+      selector:
+        "#cake-section .cake-heading .heading-line, #cake-section .cake-stage, #cake-section .blow-btn",
       y: 26,
       stagger: 0.14,
     },
     {
-      selector: "#trivia-section .game-header > *, #trivia-section .trivia-card",
+      selector:
+        "#trivia-section .game-header > *, #trivia-section .trivia-card",
       y: 26,
       stagger: 0.14,
     },
