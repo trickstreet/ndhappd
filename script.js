@@ -603,7 +603,10 @@ if (passwordInput) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: passwordInput.value }),
       })
-        .then((r) => r.json())
+        .then(async (r) => {
+          const data = await r.json().catch(() => ({}));
+          return { ok: r.ok && data && data.ok, data };
+        })
         .then((data) => {
           if (data && data.ok) {
             triggerConfetti();
@@ -642,6 +645,11 @@ if (passwordInput) {
               },
             });
           } else {
+            if (errorMsg && data && data.data && data.data.error) {
+              errorMsg.textContent = data.data.error;
+            } else if (errorMsg) {
+              errorMsg.textContent = "Access Denied";
+            }
             gsap.fromTo(
               errorMsg,
               { x: -10, opacity: 1 },

@@ -8,20 +8,20 @@ module.exports = (req, res) => {
     return;
   }
 
-  let body = "";
-  req.on("data", (chunk) => (body += chunk));
-  req.on("end", () => {
+  function handlePayload(parsed) {
     try {
-      const parsed = JSON.parse(body || "{}");
-      const pw = (parsed.password || "").trim();
-      const secret = process.env.SITE_PASSWORD || "";
+      const pw = String((parsed && parsed.password) || "").trim();
+      const secret = String(process.env.SITE_PASSWORD || "").trim();
 
       if (!secret) {
         res.status(500).json({ ok: false, error: "Server not configured" });
         return;
       }
 
-      if (pw === secret) {
+      // Keep same behavior as the previous client-side check (case-insensitive).
+      const isValid = pw.toLowerCase() === secret.toLowerCase();
+
+      if (isValid) {
         // Set HttpOnly cookie for 1 hour
         const maxAge = 60 * 60; // seconds
         res.setHeader(
@@ -30,10 +30,22 @@ module.exports = (req, res) => {
         );
         res.status(200).json({ ok: true });
       } else {
-        res.status(401).json({ ok: false });
+        res.status(401).json({ ok: false, error: "Invalid password" });
       }
     } catch (err) {
       res.status(400).json({ ok: false, error: "Bad request" });
     }
+  }
+
+  if (req.body && typeof req.body === "object") {
+    handlePayload(req.body);
+    return;
+  }
+
+  let body = "";
+  req.on("data", (chunk) => (body += chunk));
+  req.on("end", () => {
+    const parsed = body ? JSON.parse(body) : {};
+    handlePayload(parsed);
   });
 };
