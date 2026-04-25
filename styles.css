@@ -4507,64 +4507,77 @@ body.modal-open {
 
   /* --- Hero Section --- */
   #hero {
-    padding: 0 20px 80px 20px; /* More bottom padding */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Push content to bottom */
-    align-items: center;
+    padding: 60px 20px 40px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Content starts at top */
+    align-items: center !important;
+    height: 100vh !important;
+    background: url('Images/phone-hero.jpeg') no-repeat center center !important;
+    background-size: cover !important;
+    position: relative;
+    overflow: hidden;
   }
 
+  /* Hide the default eyes image on mobile */
   .hero-bg {
-    object-position: center 30% !important; /* Adjust eyes position */
-    opacity: 0.3 !important; /* Slightly more visible eyes */
+    display: none !important;
   }
 
   .hero-text {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px; /* Gap above sticky note */
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-bottom: auto !important; /* Pushes everything below to bottom */
+    z-index: 10;
   }
 
   .hero-text h1 {
-    font-size: 11vw !important;
+    font-size: 13vw !important; /* Slightly adjusted for the new layout */
     letter-spacing: -0.04em !important;
     margin-bottom: 0rem;
     mix-blend-mode: normal !important;
     color: var(--text-main) !important;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    text-align: center;
   }
 
   .hero-text .subtitle {
-    font-size: 1.5rem !important;
-    margin-top: -0.2rem !important;
-    transform: rotate(-2deg) !important;
+    font-size: 1.4rem !important;
+    margin-top: 0rem !important;
+    transform: rotate(-1deg) !important;
     text-align: center;
     width: 100%;
-    padding: 0 10px;
+    color: var(--accent-gold) !important;
+    opacity: 0.9;
   }
 
   .sticky-note {
     position: relative !important;
     top: auto !important;
     right: auto !important;
-    margin: 20px auto 0 auto !important; /* Reduced top margin since we use flex-end */
-    width: 85% !important;
-    max-width: 280px;
-    padding: 15px;
-    font-size: 0.75rem;
-    transform: rotate(2deg) !important;
+    margin: 0 auto 30px auto !important; /* Centered with bottom gap */
+    width: 90% !important;
+    max-width: 300px;
+    padding: 18px;
+    font-size: 0.8rem !important;
+    transform: rotate(1deg) !important;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 
   .pulse-counter {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    bottom: 20px !important;
-    font-size: 0.7rem !important;
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    font-size: 0.8rem !important;
     width: 100%;
     text-align: center;
-    background: linear-gradient(to top, var(--bg-deep) 0%, transparent 100%);
+    z-index: 10;
+    color: var(--text-main) !important;
+    letter-spacing: 0.1em;
     padding-bottom: 10px;
   }
 
