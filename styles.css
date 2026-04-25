@@ -20,7 +20,7 @@
 
 .peek-left:hover,
 .peek-left.peeking {
-  transform: translateX(-5%) translateY(-60%) rotate(6deg);
+  transform: translateX(-15%) translateY(-60%) rotate(6deg);
 }
 
 .peek-right {
@@ -31,7 +31,7 @@
 
 .peek-right:hover,
 .peek-right.peeking {
-  transform: translateX(5%) translateY(-50%) rotate(-4deg);
+  transform: translateX(15%) translateY(-50%) rotate(-4deg);
 }
 
 .peek-bottom {
