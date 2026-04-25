@@ -4527,7 +4527,8 @@ body.modal-open {
   }
 
   .hero-text h1 {
-    font-size: 22vw !important; /* Slightly larger for impact */
+    font-size: 11vw !important; /* Further reduced to fit "Anniversary" */
+    letter-spacing: -0.04em !important;
     margin-bottom: 0rem;
     mix-blend-mode: normal !important; /* Force visibility */
     color: var(--text-main) !important;
