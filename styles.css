@@ -4535,11 +4535,12 @@ body.modal-open {
   }
 
   .hero-text .subtitle {
-    font-size: 2rem !important;
-    margin-top: -0.5rem !important;
+    font-size: 1.5rem !important;
+    margin-top: -0.2rem !important;
     transform: rotate(-2deg) !important;
     text-align: center;
     width: 100%;
+    padding: 0 10px;
   }
 
   .sticky-note {
