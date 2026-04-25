@@ -3242,25 +3242,6 @@ body.modal-open {
 
 /* Responsive for games */
 @media (max-width: 768px) {
-  .memory-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-
-  .memory-card {
-    width: 75px;
-    height: 95px;
-  }
-
-  .card-back::before {
-    font-size: 1.5rem;
-  }
-
-  .card-front .card-text {
-    font-size: 0.7rem;
-    padding: 5px;
-  }
-
   .trivia-card {
     padding: 35px 25px;
   }
@@ -3280,11 +3261,6 @@ body.modal-open {
 }
 
 @media (max-width: 480px) {
-  .memory-card {
-    width: 65px;
-    height: 82px;
-  }
-
   .game-stats {
     flex-direction: column;
     gap: 10px;
@@ -4755,34 +4731,34 @@ body.modal-open {
 
   /* --- Memory Game --- */
   .memory-grid {
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 cols for better fit */
-    max-width: 100%;
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+    padding: 10px !important;
   }
 
   .memory-card {
-    width: 100%;
-    aspect-ratio: 3/4;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3/4 !important;
   }
 
   .card-back::before {
-    font-size: 1.4rem;
+    font-size: 2rem !important;
   }
 
   /* --- Trivia Section --- */
   .trivia-card {
-    padding: 30px 20px;
+    padding: 40px 20px !important;
   }
 
   .question-text {
-    font-size: 1.2rem;
+    font-size: 1.3rem !important;
   }
 
   .trivia-option {
-    font-size: 0.9rem;
-    padding: 12px 15px;
+    font-size: 1rem !important;
+    padding: 15px 18px !important;
   }
 
   /* --- Final Message --- */
