@@ -4506,23 +4506,52 @@ body.modal-open {
   }
 
   /* --- Hero Section --- */
+  #hero {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-bg {
+    object-position: center 20%; /* Keep eyes visible higher up */
+    opacity: 0.25 !important; /* Slightly dimmer for better text contrast */
+  }
+
+  .hero-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .hero-text h1 {
-    font-size: 18vw;
-    /* Scale up for small screens */
-    margin-bottom: 0.5rem;
+    font-size: 22vw !important; /* Slightly larger for impact */
+    margin-bottom: 0rem;
+    mix-blend-mode: normal !important; /* Force visibility */
+    color: var(--text-main) !important;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8); /* Add depth */
   }
 
   .hero-text .subtitle {
-    font-size: 1.8rem;
-    transform: rotate(-3deg);
+    font-size: 2rem !important;
+    margin-top: -0.5rem !important;
+    transform: rotate(-2deg) !important;
+    text-align: center;
+    width: 100%;
   }
 
   .sticky-note {
-    width: 100%;
+    position: relative !important; /* Move it into the flow */
+    top: auto !important;
+    right: auto !important;
+    margin: 40px auto 0 auto !important; /* Center horizontally */
+    width: 85% !important;
     max-width: 280px;
     padding: 15px;
     font-size: 0.75rem;
-    margin-top: 30px;
+    transform: rotate(2deg) !important;
   }
 
   .pulse-counter {
