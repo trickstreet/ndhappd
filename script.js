@@ -1,71 +1,52 @@
 // --- PEEKING CHARACTERS ANIMATION ---
 function initPeekingCharacters() {
-  const left = document.querySelector(".peek-left");
-  const right = document.querySelector(".peek-right");
-  const bottom = document.querySelector(".peek-bottom");
-  const all = [left, right, bottom];
+  const peekers = document.querySelectorAll(".peek");
+  if (!peekers.length) return;
 
-  // Helper: random int in [min, max]
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  const config = {
+    minDelay: 10000,
+    maxDelay: 22000,
+    peekDuration: 4000,
+    multiPeekChance: 0.2,
+  };
 
-  // Helper: random float in [min, max]
-  function randFloat(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  // Helper: pick random subset (15% chance for 2-3, else 1)
-  function pickCharacters() {
-    if (Math.random() < 0.15) {
-      // 2 or 3 characters
-      const count = randInt(2, 3);
-      const shuffled = all.slice().sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count);
-    } else {
-      // Only one
-      return [all[randInt(0, 2)]];
-    }
-  }
-
-  function peek() {
-    // Don't run on small screens
-    if (window.innerWidth < 700 || window.innerHeight < 500) return;
-    const chars = pickCharacters();
-    chars.forEach((el) => {
-      if (el) el.classList.add("peeking");
-    });
+  function triggerPeek(peeker) {
+    if (!peeker || peeker.classList.contains("peeking")) return;
+    peeker.classList.add("peeking");
     setTimeout(() => {
-      chars.forEach((el) => {
-        if (el) el.classList.remove("peeking");
-      });
-    }, 1500);
+      peeker.classList.remove("peeking");
+    }, config.peekDuration);
   }
 
-  function scheduleNext() {
-    const delay = randFloat(8, 16) * 1000;
+  function schedulePeek(peeker) {
+    const delay =
+      config.minDelay + Math.random() * (config.maxDelay - config.minDelay);
+
     setTimeout(() => {
-      peek();
-      scheduleNext();
+      triggerPeek(peeker);
+
+      if (Math.random() < config.multiPeekChance) {
+        const otherPeekers = Array.from(peekers).filter((p) => p !== peeker);
+        const randomOther =
+          otherPeekers[Math.floor(Math.random() * otherPeekers.length)];
+
+        if (randomOther) {
+          setTimeout(
+            () => triggerPeek(randomOther),
+            100 + Math.random() * 300,
+          );
+        }
+      }
+
+      schedulePeek(peeker);
     }, delay);
   }
 
-  // Hide all on resize if small
-  function handleResize() {
-    if (window.innerWidth < 700 || window.innerHeight < 500) {
-      all.forEach((el) => {
-        if (el) el.style.display = "none";
-      });
-    } else {
-      all.forEach((el) => {
-        if (el) el.style.display = "";
-      });
-    }
-  }
-  window.addEventListener("resize", handleResize);
-  handleResize();
-
-  scheduleNext();
+  // Initial staggered delays
+  peekers.forEach((peeker, index) => {
+    const initialDelay = 3000 + index * 5000 + Math.random() * 3000;
+    setTimeout(() => schedulePeek(peeker), initialDelay);
+  });
 }
 
 // Initialize peeking characters on DOMContentLoaded
@@ -633,83 +614,85 @@ if (passwordInput) {
 
   passwordInput.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      // POST password to serverless login API (SITE_PASSWORD stored in env)
-      fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: passwordInput.value }),
-      })
-        .then(async (r) => {
+      const pw = passwordInput.value;
+
+      const verifyPassword = async () => {
+        try {
+          const r = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password: pw }),
+          });
           const data = await r.json().catch(() => ({}));
-          return { ok: r.ok && data && data.ok, data };
-        })
-        .then((data) => {
-          if (data && data.ok) {
-            heroImageReadyPromise.finally(() => {
-              gsap.to(loginScreen, {
-                opacity: 0,
-                duration: 1.5,
-                ease: "power2.inOut",
-                onComplete: () => {
-                  if (loginScreen) loginScreen.style.display = "none";
-                  if (mainContent) {
-                    mainContent.style.visibility = "visible";
-                    mainContent.style.opacity = 1;
-                  }
+          if (r.ok && data && data.ok) return { ok: true };
+          
+          return { 
+            ok: false, 
+            error: data.error || (r.status === 401 ? "Invalid password" : "Server error") 
+          };
+        } catch (err) {
+          console.error("Login error:", err);
+          return { ok: false, error: "Connection error" };
+        }
+      };
 
-                  // Mark authenticated and reveal protected assets
-                  document.body.classList.add("authenticated");
-                  if (typeof window._revealProtectedAssets === "function")
-                    window._revealProtectedAssets();
+      verifyPassword().then((res) => {
+        if (res.ok) {
+          heroImageReadyPromise.finally(() => {
+            gsap.to(loginScreen, {
+              opacity: 0,
+              duration: 1.5,
+              ease: "power2.inOut",
+              onComplete: () => {
+                if (loginScreen) loginScreen.style.display = "none";
+                if (mainContent) {
+                  mainContent.style.visibility = "visible";
+                  mainContent.style.opacity = 1;
+                }
 
-                  // Start confetti exactly when the content is revealed.
-                  triggerConfetti();
+                // Mark authenticated and reveal protected assets
+                document.body.classList.add("authenticated");
+                if (typeof window._revealProtectedAssets === "function")
+                  window._revealProtectedAssets();
 
-                  // Ensure hero entrance animation runs when content becomes visible
-                  const hero = document.querySelector(".hero-text");
-                  if (hero) {
-                    hero.classList.remove("show");
-                    // small delay so the class addition occurs after paint
-                    setTimeout(() => hero.classList.add("show"), 120);
-                  }
+                // Start confetti exactly when the content is revealed.
+                triggerConfetti();
 
-                  initScrollAnimations();
-                  initLetters();
-                  initLibrary();
-                  initMemoryGame();
-                  initTriviaGame();
-                  initCake();
-                  if (typeof initSectionAnimations === "function")
-                    initSectionAnimations();
-                  if (typeof initEditorialAnimations === "function")
-                    initEditorialAnimations();
-                  if (typeof initTimelineAnimations === "function")
-                    initTimelineAnimations();
-                },
-              });
+                // Ensure hero entrance animation runs when content becomes visible
+                const hero = document.querySelector(".hero-text");
+                if (hero) {
+                  hero.classList.remove("show");
+                  // small delay so the class addition occurs after paint
+                  setTimeout(() => hero.classList.add("show"), 120);
+                }
+
+                initScrollAnimations();
+                initLetters();
+                initLibrary();
+                initMemoryGame();
+                initTriviaGame();
+                initCake();
+                if (typeof initSectionAnimations === "function")
+                  initSectionAnimations();
+                if (typeof initEditorialAnimations === "function")
+                  initEditorialAnimations();
+                if (typeof initTimelineAnimations === "function")
+                  initTimelineAnimations();
+              },
             });
-          } else {
-            if (errorMsg && data && data.data && data.data.error) {
-              errorMsg.textContent = data.data.error;
-            } else if (errorMsg) {
-              errorMsg.textContent = "Access Denied";
-            }
-            gsap.fromTo(
-              errorMsg,
-              { x: -10, opacity: 1 },
-              { x: 10, duration: 0.1, yoyo: true, repeat: 3 },
-            );
-            passwordInput.value = "";
+          });
+        } else {
+          if (errorMsg) {
+            errorMsg.textContent = res.error || "Access Denied";
           }
-        })
-        .catch(() => {
           gsap.fromTo(
             errorMsg,
             { x: -10, opacity: 1 },
             { x: 10, duration: 0.1, yoyo: true, repeat: 3 },
           );
           passwordInput.value = "";
-        });
+        }
+      });
     }
   });
 }
@@ -737,7 +720,7 @@ function triggerConfetti() {
 
 // --- 5. TIMER LOGIC ---
 function updateTimer() {
-  const start = new Date(config.ANNIVERSARY_DATE);
+  const start = new Date(SURPRISE_CONFIG.ANNIVERSARY_DATE);
   const now = new Date();
   const diff = now - start;
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -755,53 +738,63 @@ function initScrollAnimations() {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
     return;
 
-  let panels = gsap.utils.toArray(".panel");
-  gsap.to(panels, {
-    xPercent: -100 * (panels.length - 1),
-    ease: "none",
-    scrollTrigger: {
-      trigger: "#memory-lane-wrapper",
-      pin: true,
-      scrub: 1,
-      snap: 1 / (panels.length - 1),
-      end: () =>
-        "+=" + document.querySelector("#memory-lane-wrapper").offsetWidth,
-    },
-  });
+  const isMobile = window.matchMedia("(max-width: 580px)").matches;
 
-  // Darkroom: Develop photos as panels come into view
-  panels.forEach((panel, i) => {
-    const imgBox = panel.querySelector(".date-img-box");
-    if (imgBox) {
-      // First panel with image (index 1) develops immediately when section is reached
-      if (i === 1) {
-        ScrollTrigger.create({
-          trigger: "#memory-lane-wrapper",
-          start: "top 80%",
-          onEnter: () => imgBox.classList.add("developed"),
-        });
-      } else if (i > 1) {
-        ScrollTrigger.create({
-          trigger: "#memory-lane-wrapper",
-          start: "top top",
-          end: () =>
-            "+=" + document.querySelector("#memory-lane-wrapper").offsetWidth,
-          onUpdate: (self) => {
-            // Calculate which panel is currently in view
-            const panelProgress = self.progress * (panels.length - 1);
-            const currentPanel = Math.round(panelProgress);
+  if (!isMobile) {
+    let panels = gsap.utils.toArray(".panel");
+    gsap.to(panels, {
+      xPercent: -100 * (panels.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#memory-lane-wrapper",
+        pin: true,
+        scrub: 1,
+        snap: 1 / (panels.length - 1),
+        end: () =>
+          "+=" + document.querySelector("#memory-lane-wrapper").offsetWidth,
+      },
+    });
 
-            // Develop photos as they come into focus
-            if (currentPanel >= i) {
-              imgBox.classList.add("developed");
-            }
-          },
-        });
+    // Darkroom: Develop photos as panels come into view
+    panels.forEach((panel, i) => {
+      const imgBox = panel.querySelector(".date-img-box");
+      if (imgBox) {
+        if (i === 1) {
+          ScrollTrigger.create({
+            trigger: "#memory-lane-wrapper",
+            start: "top 80%",
+            onEnter: () => imgBox.classList.add("developed"),
+          });
+        } else if (i > 1) {
+          ScrollTrigger.create({
+            trigger: "#memory-lane-wrapper",
+            start: "top top",
+            end: () =>
+              "+=" + document.querySelector("#memory-lane-wrapper").offsetWidth,
+            onUpdate: (self) => {
+              const panelProgress = self.progress * (panels.length - 1);
+              const currentPanel = Math.round(panelProgress);
+              if (currentPanel >= i) {
+                imgBox.classList.add("developed");
+              }
+            },
+          });
+        }
       }
-    }
-  });
+    });
+  } else {
+    // Mobile: Vertical "Develop" Trigger
+    const imgBoxes = document.querySelectorAll(".date-img-box");
+    imgBoxes.forEach((imgBox) => {
+      ScrollTrigger.create({
+        trigger: imgBox,
+        start: "top 85%",
+        onEnter: () => imgBox.classList.add("developed"),
+      });
+    });
+  }
 
-  // Cake Section Reveal
+  // Cake Section Reveal (Universal)
   gsap.from("#cake-section", {
     scale: 0.9,
     opacity: 0,
@@ -1192,10 +1185,13 @@ function initSectionAnimations() {
 
   const panels = gsap.utils.toArray("#memory-lane-track .panel .date-card");
   panels.forEach((card) => {
+    const isMobile = window.matchMedia("(max-width: 580px)").matches;
     const isReverse = !!card.closest(".panel-2, .panel-4");
+    
     gsap.from(card, {
       opacity: 0,
-      x: isReverse ? 56 : -56,
+      x: isMobile ? 0 : (isReverse ? 56 : -56),
+      y: isMobile ? 30 : 0,
       duration: 0.95,
       ease: easeOut,
       scrollTrigger: {

@@ -1,61 +1,58 @@
-/* --- PEEKING CHARACTERS --- */
-.peek-character {
+/* =================== PEEKING CHARACTERS =================== */
+.peek {
   position: fixed;
-  z-index: 12000;
-  pointer-events: none;
-  transition:
-    transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55),
-    opacity 0.3s;
-  will-change: transform;
-  opacity: 1;
-}
-
-.peek-character img {
-  display: block;
-  width: 120px;
-  max-width: 30vw;
+  width: clamp(100px, 16vw, 200px);
   height: auto;
   user-select: none;
-  pointer-events: none;
+  pointer-events: auto;
+  -webkit-user-drag: none;
+  z-index: 9998;
+  transition: transform 1200ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
 }
 
-/* Left character: only 25% visible by default */
 .peek-left {
   left: 0;
   top: 30%;
-  transform: translateX(-75%);
+  transform: translateX(-100%) translateY(-70%);
 }
 
+.peek-left:hover,
 .peek-left.peeking {
-  transform: translateX(-45%) scale(1.08);
+  transform: translateX(-5%) translateY(-70%) rotate(4deg);
 }
 
-/* Right character: only 25% visible by default */
 .peek-right {
   right: 0;
-  top: 55%;
-  transform: translateX(75%) scaleX(-1);
+  top: 50%;
+  transform: translateX(100%) translateY(-50%);
 }
 
+.peek-right:hover,
 .peek-right.peeking {
-  transform: translateX(45%) scale(1.08) scaleX(-1);
+  transform: translateX(5%) translateY(-50%) rotate(-4deg);
 }
 
-/* Bottom character: only 25% visible by default */
 .peek-bottom {
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, 75%);
+  transform: translateX(-50%) translateY(100%);
+  width: clamp(120px, 18vw, 220px);
 }
 
+.peek-bottom:hover,
 .peek-bottom.peeking {
-  transform: translate(-50%, 45%) scale(1.08);
+  transform: translateX(-50%) translateY(0%) rotate(3deg);
 }
 
-/* Responsive: hide on small screens */
-@media (max-width: 700px), (max-height: 500px) {
-  .peek-character {
-    display: none !important;
+/* Adjust for small screens */
+@media (max-width: 768px) {
+  .peek {
+    width: 80px !important;
+  }
+  .peek-bottom {
+    width: 100px !important;
   }
 }
 
@@ -379,12 +376,10 @@ section {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    var(--bg-deep) 0%,
-    #2a1515 50%,
-    var(--bg-deep) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--bg-deep) 0%,
+      #2a1515 50%,
+      var(--bg-deep) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -514,11 +509,9 @@ section {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 70% 70%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.3) 100%
-  );
+  background: radial-gradient(circle at 70% 70%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.3) 100%);
 }
 
 .wax-seal i {
@@ -585,11 +578,9 @@ section {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--scrollbar-thumb),
-    rgba(201, 166, 107, 0.85)
-  );
+  background: linear-gradient(180deg,
+      var(--scrollbar-thumb),
+      rgba(201, 166, 107, 0.85));
   border-radius: 999px;
   border: 2px solid rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -633,7 +624,7 @@ section {
   transition: opacity 0.4s ease;
 }
 
-.envelope.open ~ .letter-backdrop,
+.envelope.open~.letter-backdrop,
 .letter-backdrop.active {
   opacity: 1;
   pointer-events: auto;
@@ -795,11 +786,9 @@ body.modal-open {
   left: 10px;
   right: 10px;
   bottom: 60px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(139, 0, 0, 0.3) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(139, 0, 0, 0.3) 0%,
+      transparent 70%);
   pointer-events: none;
   opacity: 1;
   transition: opacity 2s ease;
@@ -867,7 +856,9 @@ body.modal-open {
   max-height: 340px;
   overflow-y: auto;
 }
+
 @media (max-width: 900px) {
+
   .panel-2 .date-content,
   .panel-4 .date-content {
     max-height: 200px;
@@ -877,6 +868,7 @@ body.modal-open {
 }
 
 @media (max-width: 600px) {
+
   .panel-2 .date-content,
   .panel-4 .date-content {
     max-height: 120px;
@@ -897,11 +889,9 @@ body.modal-open {
 
 .spotlight-mask {
   /* ... same logic but updated gradient ... */
-  background: radial-gradient(
-    circle 300px at var(--x, 50%) var(--y, 50%),
-    transparent 0%,
-    rgba(0, 0, 0, 0.98) 100%
-  );
+  background: radial-gradient(circle 300px at var(--x, 50%) var(--y, 50%),
+      transparent 0%,
+      rgba(0, 0, 0, 0.98) 100%);
 }
 
 /* ========== ANNIVERSARY CAKE SECTION ========== */
@@ -978,12 +968,10 @@ body.modal-open {
   width: 320px;
   height: 100px;
   border-radius: 50%;
-  background: radial-gradient(
-    ellipse,
-    rgba(255, 180, 60, 0.3) 0%,
-    rgba(255, 120, 40, 0.08) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(ellipse,
+      rgba(255, 180, 60, 0.3) 0%,
+      rgba(255, 120, 40, 0.08) 50%,
+      transparent 75%);
   filter: blur(22px);
   pointer-events: none;
   transition: opacity 1s ease;
@@ -1038,13 +1026,11 @@ body.modal-open {
 .candle-body {
   width: 16px;
   height: 58px;
-  background: repeating-linear-gradient(
-    180deg,
-    #fdf6e3 0px,
-    #fdf6e3 6px,
-    #c9a66b 6px,
-    #c9a66b 12px
-  );
+  background: repeating-linear-gradient(180deg,
+      #fdf6e3 0px,
+      #fdf6e3 6px,
+      #c9a66b 6px,
+      #c9a66b 12px);
   border-radius: 4px 4px 2px 2px;
   box-shadow:
     inset -4px 0 8px rgba(0, 0, 0, 0.12),
@@ -1086,12 +1072,10 @@ body.modal-open {
   bottom: 0;
   width: 18px;
   height: 28px;
-  background: radial-gradient(
-    ellipse at 50% 85%,
-    rgba(255, 160, 20, 0.5) 0%,
-    rgba(255, 80, 0, 0.15) 60%,
-    transparent 100%
-  );
+  background: radial-gradient(ellipse at 50% 85%,
+      rgba(255, 160, 20, 0.5) 0%,
+      rgba(255, 80, 0, 0.15) 60%,
+      transparent 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 35% 35%;
   filter: blur(2px);
   animation: flameOuter 2s ease-in-out infinite alternate;
@@ -1103,14 +1087,12 @@ body.modal-open {
   bottom: 0;
   width: 12px;
   height: 24px;
-  background: radial-gradient(
-    ellipse at 50% 90%,
-    #fffbe6 0%,
-    #ffd54f 30%,
-    #ff9800 60%,
-    #ff5722 85%,
-    transparent 100%
-  );
+  background: radial-gradient(ellipse at 50% 90%,
+      #fffbe6 0%,
+      #ffd54f 30%,
+      #ff9800 60%,
+      #ff5722 85%,
+      transparent 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   filter: blur(0.3px);
   animation: flameFlicker 1.6s ease-in-out infinite alternate;
@@ -1127,11 +1109,9 @@ body.modal-open {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 180, 50, 0.2) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 180, 50, 0.2) 0%,
+      transparent 70%);
   pointer-events: none;
   animation: glowPulse 2.5s ease-in-out infinite alternate;
 }
@@ -1543,12 +1523,10 @@ body.modal-open {
   left: 15%;
   width: 70%;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent);
   border-radius: 2px;
 }
 
@@ -1626,6 +1604,7 @@ body.modal-open {
 }
 
 @keyframes heartbeat {
+
   0%,
   100% {
     transform: scale(1);
@@ -1653,12 +1632,10 @@ body.modal-open {
   transform: translateX(-50%);
   width: 200px;
   height: 120px;
-  background: radial-gradient(
-    ellipse,
-    rgba(255, 200, 80, 0.15) 0%,
-    rgba(255, 160, 40, 0.05) 50%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse,
+      rgba(255, 200, 80, 0.15) 0%,
+      rgba(255, 160, 40, 0.05) 50%,
+      transparent 70%);
   pointer-events: none;
   transition: opacity 0.8s ease;
   animation: glowPulse 3s ease-in-out infinite alternate;
@@ -1671,6 +1648,7 @@ body.modal-open {
 
 /* prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+
   .flame,
   .flame-outer,
   .flame-glow,
@@ -1988,16 +1966,12 @@ body.modal-open {
   display: grid;
   place-items: center;
   background:
-    radial-gradient(
-      circle at 30% 30%,
+    radial-gradient(circle at 30% 30%,
       rgba(255, 255, 255, 0.12),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 60% 70%,
+      transparent 45%),
+    radial-gradient(circle at 60% 70%,
       rgba(201, 166, 107, 0.16),
-      transparent 55%
-    ),
+      transparent 55%),
     linear-gradient(145deg, rgba(20, 8, 8, 0.9), rgba(0, 0, 0, 0.85));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
@@ -2039,13 +2013,11 @@ body.modal-open {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  background: repeating-radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.06) 0px,
-    rgba(255, 255, 255, 0.06) 1px,
-    transparent 3px,
-    transparent 6px
-  );
+  background: repeating-radial-gradient(circle,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 3px,
+      transparent 6px);
   opacity: 0.35;
 }
 
@@ -2053,11 +2025,9 @@ body.modal-open {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 30%,
-    var(--accent-gold),
-    var(--accent-red)
-  );
+  background: radial-gradient(circle at 30% 30%,
+      var(--accent-gold),
+      var(--accent-red));
   border: 2px solid rgba(232, 224, 213, 0.18);
 }
 
@@ -2225,16 +2195,12 @@ body.modal-open {
   border-radius: 50%;
   position: relative;
   background:
-    radial-gradient(
-      circle at 30% 30%,
+    radial-gradient(circle at 30% 30%,
       rgba(255, 255, 255, 0.12),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 60% 70%,
+      transparent 45%),
+    radial-gradient(circle at 60% 70%,
       rgba(201, 166, 107, 0.16),
-      transparent 55%
-    ),
+      transparent 55%),
     linear-gradient(145deg, rgba(20, 8, 8, 0.9), rgba(0, 0, 0, 0.8));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
@@ -2256,13 +2222,11 @@ body.modal-open {
   position: absolute;
   inset: 8px;
   border-radius: 50%;
-  background: repeating-radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.06) 0px,
-    rgba(255, 255, 255, 0.06) 1px,
-    transparent 3px,
-    transparent 6px
-  );
+  background: repeating-radial-gradient(circle,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 3px,
+      transparent 6px);
   opacity: 0.35;
 }
 
@@ -2270,11 +2234,9 @@ body.modal-open {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 30%,
-    var(--accent-gold),
-    var(--accent-red)
-  );
+  background: radial-gradient(circle at 30% 30%,
+      var(--accent-gold),
+      var(--accent-red));
   border: 2px solid rgba(232, 224, 213, 0.18);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
 }
@@ -2286,6 +2248,7 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
+
   /* keep FAB at bottom-right on narrow screens as well */
   #vinyl-container {
     right: 14px;
@@ -2302,6 +2265,7 @@ body.modal-open {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+
   /* Library section mobile */
   #library-section {
     padding: 60px 20px;
@@ -3649,12 +3613,10 @@ body.modal-open {
   bottom: 0;
   left: 50%;
   width: 2px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--accent-gold),
-    transparent
-  );
+  background: linear-gradient(to bottom,
+      transparent,
+      var(--accent-gold),
+      transparent);
   transform: translateX(-50%);
   z-index: 1;
 }
@@ -4181,11 +4143,9 @@ body.modal-open {
 .surprise-reveal-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(201, 166, 107, 0.08) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(201, 166, 107, 0.08) 0%,
+      transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -4214,6 +4174,7 @@ body.modal-open {
 }
 
 @keyframes sparkle-pulse {
+
   0%,
   100% {
     opacity: 0.5;
@@ -4294,13 +4255,11 @@ body.modal-open {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    #1a1510 30%,
-    #0a0a0a 60%,
-    #2a2015 62%,
-    #0a0a0a 90%
-  );
+  background: radial-gradient(circle,
+      #1a1510 30%,
+      #0a0a0a 60%,
+      #2a2015 62%,
+      #0a0a0a 90%);
   border: 2px solid rgba(201, 166, 107, 0.15);
   transition: right 0.5s ease;
   z-index: -1;
@@ -4432,20 +4391,16 @@ body.modal-open {
   gap: 6px;
   padding-right: 10px;
   scroll-behavior: smooth;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 80%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 80%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 10%,
+      black 80%,
+      transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 10%,
+      black 80%,
+      transparent 100%);
 }
 
 .sp-lyrics-scroll::-webkit-scrollbar {
@@ -4530,4 +4485,315 @@ body.modal-open {
   .sp-vinyl-peek {
     display: none;
   }
+}
+
+/* ========================================================== */
+/* COMPREHENSIVE MOBILE RESPONSIVENESS (Awwwards Pro Standard) */
+/* ========================================================== */
+
+@media (max-width: 580px) {
+  /* --- Global Mobile Overrides --- */
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  * {
+    cursor: auto !important;
+  }
+  
+  #cursor {
+    display: none !important;
+  }
+
+  section {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- Login Screen --- */
+  .login-content h2 {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+  }
+
+  #password-input {
+    width: 80vw;
+    font-size: 1rem;
+  }
+
+  /* --- Hero Section --- */
+  .hero-text h1 {
+    font-size: 18vw; /* Scale up for small screens */
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-text .subtitle {
+    font-size: 1.8rem;
+    transform: rotate(-3deg);
+  }
+
+  .sticky-note {
+    width: 100%;
+    max-width: 280px;
+    padding: 15px;
+    font-size: 0.75rem;
+    margin-top: 30px;
+  }
+
+  .pulse-counter {
+    left: 20px;
+    bottom: 30px;
+    font-size: 0.65rem;
+  }
+
+  /* --- Letters Section --- */
+  .letters-desk {
+    gap: 20px;
+  }
+
+  .envelope {
+    width: 100%;
+    max-width: 300px;
+    height: 140px;
+  }
+
+  .letter {
+    padding: 30px 20px;
+  }
+
+  .letter h4 {
+    font-size: 1.8rem;
+  }
+
+  .letter p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* --- Memory Lane (Vertical Timeline) --- */
+  #memory-lane-track {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column !important;
+    transform: none !important;
+  }
+
+  .panel {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto;
+    padding: 40px 0 !important;
+    border-bottom: 1px solid rgba(201, 166, 107, 0.1);
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  .date-card {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .date-img-box {
+    height: 40vh !important;
+    padding-bottom: 50px !important;
+  }
+
+  .date-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 25px !important;
+    text-align: left !important;
+    border: none !important;
+    border-left: 1px solid var(--accent-gold) !important;
+    max-height: none !important;
+  }
+
+  .date-content h3 {
+    font-size: 2.2rem;
+  }
+
+  /* --- Detective Board (Gifts) --- */
+  .board-container {
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding-bottom: 40px;
+  }
+
+  .board-item {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    transform: none !important;
+  }
+
+  .red-strings {
+    display: none; /* Strings don't work in grid layout */
+  }
+
+  .detective-board-header {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .detective-board-header h2 {
+    font-size: 1.3rem;
+  }
+
+  /* --- Editorial Gallery --- */
+  #editorial-gallery {
+    padding: 60px 15px !important;
+  }
+
+  .editorial-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .editorial-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .editorial-card {
+    min-height: 450px !important;
+  }
+
+  .blossom-bg-text {
+    font-size: 5rem !important;
+  }
+
+  .tokyo-header {
+    font-size: 4rem !important;
+  }
+
+  .busan-vertical-title {
+    font-size: 2.5rem !important;
+  }
+
+  /* --- Surprise Player --- */
+  .surprise-player-card {
+    flex-direction: column !important;
+  }
+
+  .sp-album-side {
+    flex: none !important;
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(201, 166, 107, 0.1);
+    padding: 30px 20px !important;
+  }
+
+  .sp-album-art-wrapper {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .sp-lyrics-side {
+    padding: 30px 20px !important;
+    max-height: 300px !important;
+  }
+
+  /* --- Cake Section --- */
+  .cake-heading {
+    margin-bottom: 40px;
+  }
+
+  .heading-line { font-size: 1.3rem; }
+  .heading-line.accent { font-size: 2rem; }
+  .heading-line.script { font-size: 2.4rem; }
+
+  .cake-layer.bottom { width: 180px; height: 50px; }
+  .cake-layer.middle { width: 150px; height: 45px; }
+  .cake-layer.top { width: 110px; height: 40px; }
+  .cake-plate { width: 220px; }
+
+  .cake-message h3 { font-size: 1.8rem; }
+  .cake-message p { font-size: 0.95rem; }
+
+  /* --- Memory Game --- */
+  .memory-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cols for better fit */
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .memory-card {
+    width: 100%;
+    aspect-ratio: 3/4;
+    height: auto;
+  }
+
+  .card-back::before { font-size: 1.4rem; }
+
+  /* --- Trivia Section --- */
+  .trivia-card {
+    padding: 30px 20px;
+  }
+
+  .question-text {
+    font-size: 1.2rem;
+  }
+
+  .trivia-option {
+    font-size: 0.9rem;
+    padding: 12px 15px;
+  }
+
+  /* --- Final Message --- */
+  .final-message-box h2 {
+    font-size: 2.2rem;
+  }
+
+  .final-message-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: center; /* Better for mobile */
+  }
+
+  /* --- Bookshelf --- */
+  .bookshelf {
+    padding: 30px 20px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .book {
+    flex: 0 0 60px;
+    height: 200px;
+  }
+
+  .book-title {
+    font-size: 0.5rem;
+  }
+
+  /* --- Floating Player --- */
+  .player-fab {
+    width: 54px;
+    height: 54px;
+  }
+
+  .player-card {
+    width: 88vw;
+    right: 0;
+  }
+}
+
+/* --- Extremely small phones --- */
+@media (max-width: 380px) {
+  .hero-text h1 { font-size: 22vw; }
+  .memory-grid { grid-template-columns: repeat(2, 1fr); }
+  .envelope { height: 120px; }
+  .heading-line.script { font-size: 2rem; }
 }
