@@ -15,12 +15,12 @@
 .peek-left {
   left: 0;
   top: 30%;
-  transform: translateX(-100%) translateY(-70%);
+  transform: translateX(-100%) translateY(-60%);
 }
 
 .peek-left:hover,
 .peek-left.peeking {
-  transform: translateX(-15%) translateY(-70%) rotate(4deg);
+  transform: translateX(-5%) translateY(-60%) rotate(6deg);
 }
 
 .peek-right {
@@ -31,7 +31,7 @@
 
 .peek-right:hover,
 .peek-right.peeking {
-  transform: translateX(15%) translateY(-50%) rotate(-4deg);
+  transform: translateX(5%) translateY(-50%) rotate(-4deg);
 }
 
 .peek-bottom {
@@ -51,6 +51,7 @@
   .peek {
     width: 80px !important;
   }
+
   .peek-bottom {
     width: 100px !important;
   }
@@ -4492,8 +4493,10 @@ body.modal-open {
 /* ========================================================== */
 
 @media (max-width: 580px) {
+
   /* --- Global Mobile Overrides --- */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     position: relative;
     width: 100%;
@@ -4502,7 +4505,7 @@ body.modal-open {
   * {
     cursor: auto !important;
   }
-  
+
   #cursor {
     display: none !important;
   }
@@ -4528,7 +4531,8 @@ body.modal-open {
 
   /* --- Hero Section --- */
   .hero-text h1 {
-    font-size: 18vw; /* Scale up for small screens */
+    font-size: 18vw;
+    /* Scale up for small screens */
     margin-bottom: 0.5rem;
   }
 
@@ -4638,7 +4642,8 @@ body.modal-open {
   }
 
   .red-strings {
-    display: none; /* Strings don't work in grid layout */
+    display: none;
+    /* Strings don't work in grid layout */
   }
 
   .detective-board-header {
@@ -4709,21 +4714,49 @@ body.modal-open {
     margin-bottom: 40px;
   }
 
-  .heading-line { font-size: 1.3rem; }
-  .heading-line.accent { font-size: 2rem; }
-  .heading-line.script { font-size: 2.4rem; }
+  .heading-line {
+    font-size: 1.3rem;
+  }
 
-  .cake-layer.bottom { width: 180px; height: 50px; }
-  .cake-layer.middle { width: 150px; height: 45px; }
-  .cake-layer.top { width: 110px; height: 40px; }
-  .cake-plate { width: 220px; }
+  .heading-line.accent {
+    font-size: 2rem;
+  }
 
-  .cake-message h3 { font-size: 1.8rem; }
-  .cake-message p { font-size: 0.95rem; }
+  .heading-line.script {
+    font-size: 2.4rem;
+  }
+
+  .cake-layer.bottom {
+    width: 180px;
+    height: 50px;
+  }
+
+  .cake-layer.middle {
+    width: 150px;
+    height: 45px;
+  }
+
+  .cake-layer.top {
+    width: 110px;
+    height: 40px;
+  }
+
+  .cake-plate {
+    width: 220px;
+  }
+
+  .cake-message h3 {
+    font-size: 1.8rem;
+  }
+
+  .cake-message p {
+    font-size: 0.95rem;
+  }
 
   /* --- Memory Game --- */
   .memory-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 cols for better fit */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cols for better fit */
     max-width: 100%;
     gap: 10px;
   }
@@ -4734,7 +4767,9 @@ body.modal-open {
     height: auto;
   }
 
-  .card-back::before { font-size: 1.4rem; }
+  .card-back::before {
+    font-size: 1.4rem;
+  }
 
   /* --- Trivia Section --- */
   .trivia-card {
@@ -4758,7 +4793,8 @@ body.modal-open {
   .final-message-text {
     font-size: 0.95rem;
     line-height: 1.8;
-    text-align: center; /* Better for mobile */
+    text-align: center;
+    /* Better for mobile */
   }
 
   /* --- Bookshelf --- */
@@ -4792,8 +4828,19 @@ body.modal-open {
 
 /* --- Extremely small phones --- */
 @media (max-width: 380px) {
-  .hero-text h1 { font-size: 22vw; }
-  .memory-grid { grid-template-columns: repeat(2, 1fr); }
-  .envelope { height: 120px; }
-  .heading-line.script { font-size: 2rem; }
+  .hero-text h1 {
+    font-size: 22vw;
+  }
+
+  .memory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .envelope {
+    height: 120px;
+  }
+
+  .heading-line.script {
+    font-size: 2rem;
+  }
 }
